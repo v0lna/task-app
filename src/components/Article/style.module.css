@@ -1,0 +1,15 @@
+.logo {
+  height: 40vmin;
+  max-height: 20vh;
+}
+
+.link {
+  color: #09d3ac;
+}
+.blank {
+  grid-area: a;
+  /* border: 2px solid black; */
+  /* box-shadow: 0 10px 6px -6px #777; */
+  /* box-shadow: 2px 4px 17px 0px rgba(119, 119, 119, 1); */
+  box-shadow: 1px 2px 12px -2px rgb(119, 119, 119);
+}
