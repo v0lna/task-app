@@ -4,7 +4,9 @@ export const COMMENTS_REQUEST = "COMMENTS_REQUEST";
 export const COMMENTS_SUCCESS = "COMMENTS_SUCCESS";
 export const COMMENTS_ERROR = "COMMENTS_ERROR";
 
-export default function getComments() {
+export const LIKE_INC = "LIKE_INC";
+
+export function getComments() {
   return async (dispatch) => {
     try {
       dispatch({ type: COMMENTS_REQUEST });
@@ -15,5 +17,10 @@ export default function getComments() {
     } catch (err) {
       dispatch({ type: COMMENTS_ERROR, payload: err });
     }
+  };
+}
+export function addLike(id) {
+  return (dispatch) => {
+    dispatch({ type: LIKE_INC, payload: id });
   };
 }

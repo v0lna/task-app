@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import getComments from "../redux/actions/comments";
+import { getComments, addLike } from "../redux/actions/comments";
 import Comments from "../components/Comments/Comments";
 
 class ArticleContainer extends Component {
@@ -8,8 +8,8 @@ class ArticleContainer extends Component {
     this.props.get();
   }
   render() {
-    const { state } = this.props;
-    return <Comments state={state} />;
+    const { state, liked } = this.props;
+    return <Comments state={state} addLike={liked} />;
   }
 }
 
@@ -19,7 +19,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    get: () => dispatch(getComments())
+    get: () => dispatch(getComments()),
+    liked: (id) => dispatch(addLike(id))
   };
 };
 

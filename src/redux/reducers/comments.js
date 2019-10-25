@@ -1,8 +1,10 @@
 import {
   COMMENTS_REQUEST,
   COMMENTS_SUCCESS,
-  COMMENTS_ERROR
+  COMMENTS_ERROR,
+  LIKE_INC
 } from "../actions/comments";
+import _clone from "lodash.clonedeep";
 
 const initialState = {
   comments: [],
@@ -10,6 +12,24 @@ const initialState = {
   error: false
 };
 
+const getObject = (arr, targetId) => {
+  const result = _clone(arr);
+
+  function addLike(array) {
+    array.forEach((element) => {
+      if (element.id === targetId) {
+        const currentLikes =
+          typeof element.likes === "number" ? element.likes : 0;
+        element.likes = currentLikes + 1;
+      }
+      if (element.replies && element.replies.length > 0) {
+        addLike(element.replies);
+      }
+    });
+  }
+  addLike(result);
+  return result;
+};
 export const commentsReducer = (store = initialState, action) => {
   switch (action.type) {
     case COMMENTS_REQUEST:
@@ -29,6 +49,11 @@ export const commentsReducer = (store = initialState, action) => {
         ...store,
         loading: false,
         error: action.payload
+      };
+    case LIKE_INC:
+      return {
+        ...store,
+        comments: getObject(store.comments, action.payload)
       };
     default:
       return store;

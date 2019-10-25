@@ -9,7 +9,7 @@ export default function Article({ state }) {
     <div className={style.blank}>
       {state.error ? <p>state.error</p> : null}
       {state.loading ? (
-        <p>Loading...</p>
+        <p className={style.sys}>Loading...</p>
       ) : state.articles ? (
         state.articles.map((item) => {
           return (

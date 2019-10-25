@@ -13,3 +13,7 @@
   /* box-shadow: 2px 4px 17px 0px rgba(119, 119, 119, 1); */
   box-shadow: 1px 2px 12px -2px rgb(119, 119, 119);
 }
+.sys {
+  color: #26a1f7;
+  font-weight: 600;
+}

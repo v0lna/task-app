@@ -2,7 +2,7 @@ import React from "react";
 import style from "./style.module.css";
 // import { articleAPI, commentsAPI } from "../../utils";
 
-export default function Comments({ state }) {
+export default function Comments({ state, addLike }) {
   // articleAPI.get().then((res) => console.log(res));
   function getOneComment(arr) {
     const result = [];
@@ -30,32 +30,43 @@ export default function Comments({ state }) {
       // marginLeft
     };
     let classStyle = wrapLvl === 0 ? null : newStyle;
-    console.log(wrapLvl);
     const repl =
       obj.replies && obj.replies.length > 0 ? obj.replies.length : false;
     return (
       <div className={style.blank} style={classStyle} key={obj.id}>
         <p>{obj.name}</p>
         <div dangerouslySetInnerHTML={{ __html: obj.commentText }} />
-        <span role="img" aria-label="like">
-          👍 {obj.likes}
-        </span>
+        <span
+          className={style.likeBtn}
+          role="img"
+          aria-label="like"
+          id={obj.id}
+        >
+          👍
+        </span>{" "}
+        <span> {obj.likes}</span>
         {repl ? <span> ↪ {repl}</span> : null}
       </div>
     );
   }
 
-  // console.log(state);
+  const likeHandle = (e) => {
+    // console.log(e.target.innerHTML.indexOf("👍"));
+
+    if (e.target.innerHTML.indexOf("👍") !== -1) addLike(+e.target.id);
+    // console.log(addLiked);
+  };
+  console.log(state);
   return (
     <div className={style.commentsBody}>
-      <span>Comments</span>
+      <span className={style.sys}>Comments</span>
       {state.error ? (
-        <p>state.error</p>
+        <p className={style.sys}> state.error</p>
       ) : state.loading ? (
-        <p>Loading...</p>
+        <p className={style.sys}>Loading...</p>
       ) : state.comments && state.comments.length > 0 ? (
         <div className={style.container}>
-          <div className={style.gridContainer}>
+          <div className={style.gridContainer} onClick={(e) => likeHandle(e)}>
             {getOneComment(state.comments)}
           </div>
         </div>
