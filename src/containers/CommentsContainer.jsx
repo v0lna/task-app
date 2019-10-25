@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Article from "../components/Article/Article";
-import getArticles from "../redux/actions/article";
+import getComments from "../redux/actions/comments";
+import Comments from "../components/Comments/Comments";
 
 class ArticleContainer extends Component {
   componentDidMount() {
@@ -9,17 +9,17 @@ class ArticleContainer extends Component {
   }
   render() {
     const { state } = this.props;
-    return <Article state={state} />;
+    return <Comments state={state} />;
   }
 }
 
 const mapStateToProps = (state) => ({
-  state: state.articles
+  state: state.comments
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    get: () => dispatch(getArticles())
+    get: () => dispatch(getComments())
   };
 };
 

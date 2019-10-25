@@ -31,7 +31,7 @@ const commentsData = [
         likes: 0,
         replies: [
           {
-            id: 11,
+            id: 12, // id 11, normalize
             commentText: "<p>Where can I get some?</p>",
             name: "Carl"
           }

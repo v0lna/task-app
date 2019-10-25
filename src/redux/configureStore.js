@@ -1,5 +1,11 @@
-import { applyMiddleware, createStore } from "redux";
+import { applyMiddleware, createStore, combineReducers } from "redux";
 import { articleReducer } from "./reducers/article";
+import { commentsReducer } from "./reducers/comments";
 import thunk from "redux-thunk";
 
-export const store = createStore(articleReducer, applyMiddleware(thunk));
+const reducers = combineReducers({
+  articles: articleReducer,
+  comments: commentsReducer
+});
+
+export const store = createStore(reducers, applyMiddleware(thunk));

@@ -10,7 +10,7 @@ export default function getArticles() {
       dispatch({ type: ARTICLE_REQUEST });
 
       const res = await articleAPI.get();
-      console.log(res);
+      // console.log(res);
       dispatch({ type: ARTICLE_SUCCESS, payload: [res] });
     } catch (err) {
       dispatch({ type: ARTICLE_ERROR, payload: err });

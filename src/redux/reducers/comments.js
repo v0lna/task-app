@@ -1,22 +1,16 @@
-const COMMENTS_REQUEST = "COMMENTS_REQUEST";
-const COMMENTS_SUCCESS = "COMMENTS_SUCCESS";
-const COMMENTS_ERROR = "COMMENTS_ERROR";
+import {
+  COMMENTS_REQUEST,
+  COMMENTS_SUCCESS,
+  COMMENTS_ERROR
+} from "../actions/comments";
+
 const initialState = {
-  comments: [
-    {
-      id: 2000,
-      commentText:
-        "<p>Hello World<strong>FROM INITIAL COMMENTS</strong> ! How are you today?</p>",
-      name: "John Random",
-      likes: 3,
-      replies: [{ id: 55, commentText: "<p>I'm fine</p>", name: "Matt" }]
-    }
-  ],
+  comments: [],
   loading: false,
   error: false
 };
 
-export const articleReducer = (store, action) => {
+export const commentsReducer = (store = initialState, action) => {
   switch (action.type) {
     case COMMENTS_REQUEST:
       return {
@@ -28,7 +22,7 @@ export const articleReducer = (store, action) => {
       return {
         ...store,
         loading: false,
-        articles: action.payload
+        comments: action.payload
       };
     case COMMENTS_ERROR:
       return {

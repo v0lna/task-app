@@ -3,7 +3,7 @@ import moment from "moment";
 import style from "./style.module.css";
 // import { articleAPI, commentsAPI } from "../../utils";
 
-export default function Article({ state, getArticles }) {
+export default function Article({ state }) {
   // articleAPI.get().then((res) => console.log(res));
   return (
     <div className={style.blank}>
