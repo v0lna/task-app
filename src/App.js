@@ -1,14 +1,15 @@
 import React from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
-import Article from "./components/Article/Article";
+import ArticleContainer from "./containers/ArticleContainer";
 
 function App() {
   return (
     <div className="App">
       {/* <header className="App-header"> */}
       <Header />
-      <Article />
+      <ArticleContainer />
+      {/* <Article /> */}
       {/* </header> */}
     </div>
   );

@@ -1,22 +1,31 @@
 import React from "react";
+import moment from "moment";
 import style from "./style.module.css";
-import logo from "../../logo.svg";
+// import { articleAPI, commentsAPI } from "../../utils";
 
-export default function Article() {
+export default function Article({ state, getArticles }) {
+  // articleAPI.get().then((res) => console.log(res));
   return (
     <div className={style.blank}>
-      <img src={logo} className={style.logo} alt="logo" />
-      <p>
-        Edit <code>src/App.js</code> and save to reload.
-      </p>
-      <a
-        className={style.link}
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
+      {state.error ? <p>state.error</p> : null}
+      {state.loading ? (
+        <p>Loading...</p>
+      ) : state.articles ? (
+        state.articles.map((item) => {
+          return (
+            <div key={item.id}>
+              <h3>{item.title}</h3>
+              <div>
+                {moment
+                  .unix(item.date)
+                  .locale("ru")
+                  .format("MMMM D YYYY HH:mm:ss")}
+              </div>
+              <div dangerouslySetInnerHTML={{ __html: item.text }} />
+            </div>
+          );
+        })
+      ) : null}
     </div>
   );
 }
