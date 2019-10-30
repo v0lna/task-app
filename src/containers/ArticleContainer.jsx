@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Article from "../components/Article/Article";
+import {Article} from "../components/Article/Article";
 import getArticles from "../redux/actions/article";
 
 class ArticleContainer extends Component {

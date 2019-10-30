@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getComments, addLike } from "../redux/actions/comments";
-import Comments from "../components/Comments/Comments";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getComments, addLike } from '../redux/actions/comments';
+import { Comments } from '../components/Comments/Comments';
 
 class ArticleContainer extends Component {
   componentDidMount() {
@@ -14,17 +14,17 @@ class ArticleContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  state: state.comments
+  state: state.comments,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     get: () => dispatch(getComments()),
-    liked: (id) => dispatch(addLike(id))
+    liked: (id) => dispatch(addLike(id)),
   };
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ArticleContainer);
