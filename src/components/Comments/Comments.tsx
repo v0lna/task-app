@@ -1,17 +1,12 @@
 import React, {SyntheticEvent} from "react";
 import styled from 'styled-components';
 import { P } from "../Article/Article"
+import { Comment } from "types/Comment";
+import { CommentsInitState } from "redux/reducers/comments";
  
-interface Comment {
-  id: number; commentText: string; name: string; likes?: number; replies?: Comment[]
-}
 
 interface Props {
-  state: {
-    comments: Comment[];
-    loading: boolean;
-    error: boolean;
-  },
+  state: CommentsInitState,
   addLike(id: number): void
 }
 

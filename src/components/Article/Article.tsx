@@ -1,14 +1,10 @@
 import React from 'react';
 import moment from 'moment';
 import styled from 'styled-components';
-
-interface Props {
-  state: {
-    error: boolean;
-    loading: boolean;
-    articles: { id: number; title: string; date: number; text: string }[];
-  };
-};
+import { ArticleInitState } from '../../redux/reducers/article';
+export interface ArticleProps {
+  state: ArticleInitState;
+}
 const Div = styled.div`
   grid-area: a;
   box-shadow: 1px 2px 12px -2px rgb(119, 119, 119);
@@ -19,7 +15,7 @@ export const P = styled.p`
 `;
 // let userTestStatus: { id: number, name: string }[] = [
 // export default function Article(props): React.FC<Props> {
-export const Article: React.FC<Props> = (props) => {
+export const Article: React.FC<ArticleProps> = (props) => {
   const {
     state: { error, loading, articles },
   } = props;
