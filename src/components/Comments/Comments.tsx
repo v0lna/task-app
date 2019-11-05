@@ -1,8 +1,9 @@
 import React, {SyntheticEvent} from "react";
 import styled from 'styled-components';
-import { P } from "../Article/Article"
 import { Comment } from "types/Comment";
 import { CommentsInitState } from "redux/reducers/comments";
+import InfoText from "components/style/InfoText";
+import { ContentWrapper } from "components/style/ContentWrapper";
  
 
 interface Props {
@@ -10,19 +11,16 @@ interface Props {
   addLike(id: number): void
 }
 
-type DOCprops = {
+type CommentContainerProps = {
   width: string,
   marginTop: string;
 }
-
-const DivOneComment = styled.div<DOCprops>`
-  box-shadow: 1px 2px 12px -2px rgb(119, 119, 119);
-  width: 55vw;
+const CommentContainer = styled(ContentWrapper)<CommentContainerProps>`
   width: ${props => props.width };
   margin-top: ${props => props.marginTop}
 `
 
-const Span = styled.span`
+const EmojiSpanBtn = styled.span`
   cursor: pointer;
 `
 const DivCommentsContainer = styled.div`
@@ -39,9 +37,9 @@ const DivGridContainer = styled.div`
   `
 export const Comments: React.FC<Props> = (props) => {
 
-  const { state, addLike } = props;
+  const { state: {error, loading, comments}, addLike } = props;
 
-  function getOneComment(arr: Comment[]) {
+  function getAllComments(arr: Comment[]) {
     const result: JSX.Element[] = [];
     let replCount: number = 0;
     function mainWorker(array: Comment[]) {
@@ -63,19 +61,19 @@ export const Comments: React.FC<Props> = (props) => {
     const repl =
       obj.replies && obj.replies.length > 0 ? obj.replies.length : false;
     return (
-        <DivOneComment key={obj.id} width={widthSize} marginTop={marginTop}>
-        <p>{obj.name}</p>
-        <div dangerouslySetInnerHTML={{ __html: obj.commentText }} />
-        <Span
-          role="img"
-          aria-label="like"
-          id={`${obj.id}`}
-        >
-          👍
-        </Span>{" "}
-        <span> {obj.likes}</span>
-        {repl ? <span> ↪ {repl}</span> : null}
-        </DivOneComment>
+        <CommentContainer key={obj.id} width={widthSize} marginTop={marginTop}>
+          <p>{obj.name}</p>
+          <div dangerouslySetInnerHTML={{ __html: obj.commentText }} />
+          <EmojiSpanBtn
+            role="img"
+            aria-label="like"
+            id={`${obj.id}`}
+          >
+            👍
+          </EmojiSpanBtn>{" "}
+          <span>{obj.likes}</span>
+          {repl ? <span> ↪ {repl}</span> : null}
+        </CommentContainer>
     );
   }
 
@@ -86,15 +84,15 @@ export const Comments: React.FC<Props> = (props) => {
   };
   return (
       <DivCommentsContainer>
-      <P>Comments</P>
-      {state.error ? (
-        <P> state.error</P>
-      ) : state.loading ? (
-        <P> Loading...</P>
-      ) : state.comments && state.comments.length > 0 ? (
+      <InfoText>Comments</InfoText>
+      {error ? (
+        <InfoText isError={error? true : false}> Error :(</InfoText>
+      ) : loading ? (
+        <InfoText> Loading...</InfoText>
+      ) : comments && comments.length > 0 ? (
         <DivContainer>
           <DivGridContainer onClick={(e) => likeHandle(e)}>
-            {getOneComment(state.comments)}
+            {getAllComments(comments)}
           </DivGridContainer>
         </DivContainer>
       ) : null}

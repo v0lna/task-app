@@ -8,6 +8,14 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AppActions } from 'types/actions';
 import { bindActionCreators } from 'redux';
 
+interface LinkStateProps {
+  state: CommentsInitState;
+}
+interface LinkDispatchProps {
+  get: () => void;
+  liked: (id: number) => void;
+}
+
 type Props = LinkStateProps & LinkDispatchProps;
 
 class ArticleContainer extends Component<Props> {
@@ -18,14 +26,6 @@ class ArticleContainer extends Component<Props> {
     const { state, liked } = this.props;
     return <Comments state={state} addLike={liked} />;
   }
-}
-
-interface LinkStateProps {
-  state: CommentsInitState;
-}
-interface LinkDispatchProps {
-  get: () => void;
-  liked: (id: number) => void;
 }
 
 const mapStateToProps = (state: AppStore): LinkStateProps => ({

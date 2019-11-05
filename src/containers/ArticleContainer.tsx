@@ -8,6 +8,13 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AppActions } from 'types/actions';
 import { bindActionCreators } from 'redux';
 
+interface LinkStateProps {
+  state: ArticleInitState;
+}
+interface LinkDispatchProps {
+  get: () => void;
+}
+
 type Props = LinkStateProps & LinkDispatchProps;
 
 class ArticleContainer extends Component<Props> {
@@ -18,13 +25,6 @@ class ArticleContainer extends Component<Props> {
     const { state } = this.props;
     return <Article state={state} />;
   }
-}
-
-interface LinkStateProps {
-  state: ArticleInitState;
-}
-interface LinkDispatchProps {
-  get: () => void;
 }
 
 const mapStateToProps = (state: AppStore): LinkStateProps => ({
